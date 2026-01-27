@@ -2,21 +2,45 @@
 
 A lightweight proxy layer between a user and an LLM that enforces **human-like conversational pacing**. The proxy prioritizes *progressive disclosure*, *brevity*, and *curiosity-by-constraint* rather than raw completeness.
 
+## Overview
+
+Modern LLMs optimize for completeness and helpfulness, often producing responses that are verbose, front-loaded with information, and poorly paced for human conversation. CPP addresses this by delivering high-quality content *one spoon at a time*, mimicking how two thoughtful humans converse.
+
+## Features
+
+- **Progressive Disclosure**: Reveals information one conceptual unit at a time
+- **User Agency**: User controls the pace and direction of the conversation
+- **Brevity-First**: Prioritizes concise, digestible chunks over comprehensive dumps
+- **Interactive CLI**: Simple command-line interface with intuitive controls
+
 ## Installation
 
+### Prerequisites
+
+- Python 3.8 or higher
+- OpenAI API key
+
+### Setup
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd cpp
+```
+
+2. Install the package:
 ```bash
 pip install -e .
 ```
 
-## Setup
-
-Set your OpenAI API key:
-
+3. Set your OpenAI API key:
 ```bash
 export OPENAI_API_KEY=your-api-key-here
 ```
 
 ## Usage
+
+### Basic Usage
 
 ```bash
 cpp ask "What is context engineering?"
@@ -35,7 +59,7 @@ The CLI will:
 - `s` → Switch angle (placeholder in v0)
 - `q` → Quit session
 
-## Example
+### Example Session
 
 ```
 > cpp ask "What is context engineering?"
@@ -50,6 +74,41 @@ Context engineering shapes how a model responds by carefully designing prompts, 
 > 
 ```
 
+## Architecture
+
+The system consists of three main components:
+
+- **CLI (`cpp/cli.py`)**: Handles user interaction and input/output
+- **Proxy (`cpp/proxy.py`)**: Manages conversation pacing and chunking
+- **LLM (`cpp/llm.py`)**: Interfaces with the OpenAI API
+
+See `docs/spec.md` for detailed architecture and design decisions.
+
 ## Development
 
 This is a minimal MVP implementation following the spec in `docs/spec.md`.
+
+### Project Structure
+
+```
+cpp/
+├── cpp/
+│   ├── __init__.py
+│   ├── cli.py          # Command-line interface
+│   ├── llm.py          # LLM integration
+│   └── proxy.py        # Pacing proxy logic
+├── docs/
+│   ├── spec.md         # Detailed specification
+│   └── sequence-diagram.md
+├── pyproject.toml      # Project configuration
+├── requirements.txt    # Python dependencies
+└── README.md
+```
+
+## License
+
+[Add your license here]
+
+## Contributing
+
+[Add contribution guidelines if applicable]
