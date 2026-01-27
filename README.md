@@ -11,6 +11,7 @@ Modern LLMs optimize for completeness and helpfulness, often producing responses
 - **Progressive Disclosure**: Reveals information one conceptual unit at a time
 - **User Agency**: User controls the pace and direction of the conversation
 - **Brevity-First**: Prioritizes concise, digestible chunks over comprehensive dumps
+- **Optional Diagrams**: Per-idea ASCII diagrams, validated against the idea text (hidden if they introduce new terms)
 - **Interactive CLI**: Simple command-line interface with intuitive controls
 
 ## Installation
@@ -46,15 +47,34 @@ export OPENAI_API_KEY=your-api-key-here
 cpp ask "What is context engineering?"
 ```
 
+Or run via module:
+
+```bash
+python -m cpp.cli ask "What is context engineering?"
+```
+
 The CLI will:
 1. Make one upstream LLM call
 2. Parse the response into chunks
 3. Display one chunk at a time
 4. Present control options after each chunk
 
+### CLI Options
+
+- **`--no-diagrams`** — Always hide diagrams, even if the upstream model includes them.
+- **`--debug`** — Print validator decisions for each chunk: extra tokens (if any) and whether the diagram was shown or hidden.
+
+Example:
+
+```bash
+python -m cpp.cli ask "what's the difference between harmonics and overtones?" --debug
+```
+
+Diagrams are **optional** and **validated** against the idea text. A diagram is shown only if it reuses terms from the idea; otherwise it is replaced with `Diagram: (none)`. Use `--debug` to see which diagrams were accepted or hidden.
+
 ### Controls
 
-- `enter` or `next` → Show next chunk
+- **Enter** or `next` → Show next chunk
 - `d` → Go deeper on current chunk (placeholder in v0)
 - `s` → Switch angle (placeholder in v0)
 - `q` → Quit session
@@ -69,7 +89,9 @@ Processing: What is context engineering?
 Idea 1:
 Context engineering shapes how a model responds by carefully designing prompts, roles, and constraints.
 
-[next] Continue  [d] Deeper  [s] Switch angle  [q] Quit
+Diagram: (none)
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
 
 > 
 ```
@@ -94,14 +116,17 @@ This is a minimal MVP implementation following the spec in `docs/spec.md`.
 cpp/
 ├── cpp/
 │   ├── __init__.py
-│   ├── cli.py          # Command-line interface
-│   ├── llm.py          # LLM integration
-│   └── proxy.py        # Pacing proxy logic
+│   ├── cli.py             # Command-line interface
+│   ├── diagram_validator.py  # Diagram humility validation
+│   ├── llm.py             # LLM integration
+│   ├── parser.py          # Upstream response parsing
+│   ├── prompts/           # Upstream prompt template
+│   └── proxy.py           # Pacing proxy logic
 ├── docs/
-│   ├── spec.md         # Detailed specification
+│   ├── spec.md            # Detailed specification
 │   └── sequence-diagram.md
-├── pyproject.toml      # Project configuration
-├── requirements.txt    # Python dependencies
+├── pyproject.toml         # Project configuration
+├── requirements.txt       # Python dependencies
 └── README.md
 ```
 

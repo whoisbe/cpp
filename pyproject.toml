@@ -16,4 +16,7 @@ dependencies = [
 cpp = "cpp.cli:main"
 
 [tool.setuptools]
-packages = ["cpp"]
+packages = ["cpp", "cpp.prompts"]
+
+[tool.setuptools.package-data]
+cpp.prompts = ["*.md"]
