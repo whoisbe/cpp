@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cpp"
+version = "0.1.0"
+description = "Conversational Pacing Proxy - Human-like conversational pacing for LLMs"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "openai>=1.0.0",
+]
+
+[project.scripts]
+cpp = "cpp.cli:main"
+
+[tool.setuptools]
+packages = ["cpp"]
