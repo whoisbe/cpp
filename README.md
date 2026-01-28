@@ -109,6 +109,12 @@ The system consists of three main components:
 
 See `docs/spec.md` for detailed architecture and design decisions.
 
+## NLP Diagrammer
+
+The `nlp_diagrammer/` directory contains an **experimental, extractable module** for generating ASCII diagrams from natural language descriptions using NLP techniques. This module is used for shadow logging and comparison with LLM-generated diagrams.
+
+**Note:** `nlp_diagrammer/` is designed to be independently extractable and can be used as a standalone tool. Run artifacts (outputs in `nlp_diagrammer/out/`) are intentionally ignored via `.gitignore` to keep the repository clean.
+
 ## Stress Testing
 
 Run automated stress tests:
