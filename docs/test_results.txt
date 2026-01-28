@@ -1,0 +1,471 @@
+cpp ask "what's the difference between harmonics and overtones in sound design?" --debug
+Processing: what's the difference between harmonics and overtones in sound design?
+
+
+Idea 1:
+Harmonics are integer multiples of a fundamental frequency in a sound wave.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 2:
+Overtones are any frequencies higher than the fundamental frequency, including harmonics.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 3:
+The first overtone is the second harmonic, which is twice the frequency of the fundamental.
+
+Diagram: (none)
+  [debug] diagram hidden (extra tokens: 1st, 2x)
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 4:
+Harmonics contribute to the timbre of a sound, shaping its unique character.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 5:
+Overtones can include non-harmonic frequencies, like in inharmonic sounds.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 6:
+Harmonics always follow a specific ratio to the fundamental frequency; overtones do not have to.
+
+Diagram: (none)
+  [debug] diagram hidden (extra tokens: frequencies, higher, integer, multiples)
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 7:
+In music, harmonics are often intentionally used to create rich textures.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 8:
+Overtones can be perceived in complex tones, influencing how we perceive sound.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 9:
+In sound synthesis, harmonics can be manipulated to design unique sounds.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 10:
+Understanding harmonics and overtones helps in mixing and mastering audio tracks.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+No more ideas available.
+
+cpp ask “What’s the difference between fermions and bosons?” --debug
+zsh: no matches found: bosons?”
+(cpp) ➜  cpp git:(main) ✗ cpp ask "What’s the difference between fermions and bosons?" --debug
+Processing: What’s the difference between fermions and bosons?
+
+
+Idea 1:
+Fermions are particles that follow the Pauli exclusion principle and cannot occupy the same quantum state.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 2:
+Bosons are particles that do not follow the Pauli exclusion principle and can occupy the same quantum state.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 3:
+Fermions include particles like electrons, protons, and neutrons.
+
+Diagram:
+```
+Fermions
+|
++-- Electrons
+|
++-- Protons
+|
++-- Neutrons
+```
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 4:
+Bosons include particles like photons, W and Z bosons, and gluons.
+
+Diagram:
+```
+Bosons
+|
++-- Photons
+|
++-- W Bosons
+|
++-- Z Bosons
+|
++-- Gluons
+```
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 5:
+Fermions have half-integer spin (e.g., 1/2), while bosons have integer spin (e.g., 0, 1).
+
+Diagram: (none)
+  [debug] diagram hidden (extra tokens: type)
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 6:
+The statistics that govern fermions are called Fermi-Dirac statistics.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 7:
+The statistics that govern bosons are called Bose-Einstein statistics.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 8:
+Fermions make up matter, while bosons are often force carriers in quantum field theory.
+
+Diagram: (none)
+  [debug] diagram hidden (extra tokens: particles)
+
+[d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+No more ideas available.
+
+cpp ask "What’s the difference between TCP and UDP?" --debug
+Processing: What’s the difference between TCP and UDP?
+
+
+Idea 1:
+TCP is a connection-oriented protocol that ensures reliable data transmission between sender and receiver.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 2:
+UDP is a connectionless protocol that allows data to be sent without establishing a connection first.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 3:
+TCP guarantees the order of data packets, ensuring they arrive in the sequence sent.
+
+Diagram: (none)
+  [debug] diagram hidden (extra tokens: 1, 2, 3, packet)
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 4:
+UDP does not guarantee the order of data packets, which may arrive in any sequence.
+
+Diagram: (none)
+  [debug] diagram hidden (extra tokens: 1, 2, 3, packet)
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 5:
+TCP uses flow control and congestion control mechanisms to manage data transmission.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 6:
+UDP has lower overhead than TCP, making it faster for applications that need speed over reliability.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 7:
+TCP is commonly used for applications where data integrity is critical, like web browsing and emails.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 8:
+UDP is often used for time-sensitive applications like video streaming and online gaming, where speed is essential.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 9:
+TCP establishes a three-way handshake to initiate a connection before data transfer begins.
+
+Diagram: (none)
+  [debug] diagram hidden (extra tokens: ack, receiver, sender, syn)
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 10:
+UDP sends data packets without a handshake, allowing for immediate transmission.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+No more ideas available.
+
+cpp ask "What is self-organization?" --debug
+Processing: What is self-organization?
+
+
+Idea 1:
+Self-organization is the process where a system spontaneously arranges itself into a structured form without external direction.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 2:
+In self-organization, local interactions among components lead to global patterns and structures.
+
+Diagram: (none)
+  [debug] diagram hidden (extra tokens: v)
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 3:
+Examples of self-organization include flocking birds, ant colonies, and cellular automata.
+
+Diagram: (none)
+  [debug] diagram hidden (extra tokens: v)
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 4:
+Self-organization occurs in various fields, including biology, physics, and computer science.
+
+Diagram: (none)
+  [debug] diagram hidden (extra tokens: v)
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 5:
+The process of self-organization often involves feedback loops that enhance or suppress certain behaviors.
+
+Diagram: (none)
+  [debug] diagram hidden (extra tokens: loop)
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 6:
+Self-organization can lead to resilience in systems, allowing them to adapt to changing environments.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 7:
+The concept of self-organization challenges traditional views of control and hierarchy in systems.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 8:
+In social systems, self-organization can manifest as collective behavior without central coordination.
+
+Diagram: (none)
+  [debug] diagram hidden (extra tokens: v)
+
+[d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+No more ideas available.
+
+cpp ask "Explain einstein's special theory of relativity" --debug
+Processing: Explain einstein's special theory of relativity
+
+
+Idea 1:
+The principle of relativity states that the laws of physics are the same for all observers in uniform motion relative to each other.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 2:
+Time dilation occurs when an object approaches the speed of light, causing time to pass slower for that object compared to a stationary observer.
+
+Diagram: (none)
+  [debug] diagram hidden (extra tokens: moving, passes)
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 3:
+Length contraction occurs when an object moves at relativistic speeds, resulting in the object appearing shorter in the direction of motion from the perspective of a stationary observer.
+
+Diagram: (none)
+  [debug] diagram hidden (extra tokens: moving)
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 4:
+The speed of light in a vacuum is constant and is the ultimate speed limit in the universe, regardless of the observer's motion.
+
+Diagram: (none)
+  [debug] diagram shown
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 5:
+Mass-energy equivalence is expressed by the equation E=mc², indicating that mass can be converted into energy and vice versa.
+
+Diagram: (none)
+  [debug] diagram hidden (extra tokens: m)
+
+[Enter] Next  [d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+Idea 6:
+Simultaneity is relative; events that are simultaneous for one observer may not be simultaneous for another observer in motion.
+
+Diagram: (none)
+  [debug] diagram hidden (extra tokens: 1, 2, b, event)
+
+[d] Deeper  [s] Switch angle  [q] Quit
+
+>
+
+No more ideas available.

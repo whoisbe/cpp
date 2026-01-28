@@ -1,0 +1,26 @@
+[
+  {
+    "id": "audio_harmonics_overtones",
+    "prompt": "what's the difference between harmonics and overtones in sound design?"
+  },
+  {
+    "id": "physics_fermions_bosons",
+    "prompt": "What's the difference between fermions and bosons?"
+  },
+  {
+    "id": "net_tcp_udp",
+    "prompt": "What's the difference between TCP and UDP?"
+  },
+  {
+    "id": "ml_supervised_unsupervised",
+    "prompt": "What's the difference between supervised and unsupervised learning?"
+  },
+  {
+    "id": "complex_self_organization",
+    "prompt": "What is self-organization?"
+  },
+  {
+    "id": "physics_special_relativity",
+    "prompt": "Explain Einstein's special theory of relativity."
+  }
+]

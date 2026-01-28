@@ -1,0 +1,67 @@
+You are working in a new incubator module inside the existing CPP repo. Do NOT modify CPP core logic yet.
+
+Goal: Create an experimental NLP-based diagram renderer that can generate safe ASCII diagrams from single idea sentences.
+
+## Create a new package
+Add a new folder at repo root:
+- nlp_diagrammer/
+
+Add:
+- nlp_diagrammer/__init__.py
+- nlp_diagrammer/diagrammer.py
+- nlp_diagrammer/templates.py
+- nlp_diagrammer/utils.py (small helpers)
+
+Also add:
+- tests/test_cases.json
+- scripts/run_eval.py
+- docs/nlp_diagrammer_spec.md
+
+## Requirements
+- Deterministic: same input => same output
+- ASCII only, <= 8 lines
+- Do not introduce new concepts; reuse words/phrases from the sentence plus a small glue vocabulary:
+  Allowed glue tokens/phrases: 'Priority:', 'Constraints:', '|', '->', ',', ':'
+- Provide `render_diagram(idea_text: str) -> list[str] | None`
+- Provide `explain_parse(idea_text: str) -> dict` for debugging
+- Do not add heavy dependencies in v0. Use pure Python heuristics (regex, simple tokenization).
+  (If spaCy is desired later, keep it optional and off by default.)
+
+## Heuristic extraction (v0)
+Implement simple extraction:
+- subject: first token group before the first verb-like word OR first capitalized phrase
+- detect predicate class:
+  - PRIORITY verbs: 'prioritizes','ensures','provides','offers','focuses'
+  - COMPARE markers: 'vs','versus','whereas','while','but'
+- extract constraint phrases:
+  - 'without <noun>'
+  - 'in <noun>'
+  - adjectives preceding a noun (best-effort, conservative)
+- Keep it conservative: if uncertain, return None.
+
+## Templates
+Implement 3 templates:
+A) priority/constraint template
+B) compare template
+C) category template
+
+Choose the safest template that matches the sentence pattern.
+
+## Evaluator script
+Implement scripts/run_eval.py:
+- Load tests/test_cases.json
+- For each case, call render_diagram and validate:
+  - line count <= 8
+  - only allowed glue + tokens present in input sentence (case-insensitive token match)
+- Write a markdown report to out/eval_<timestamp>.md with:
+  - input sentence
+  - diagram output
+  - pass/fail + reasons
+
+## Acceptance criteria
+- Running: `python scripts/run_eval.py`
+  generates an out/ report and prints summary counts.
+- The module does not touch CPP runtime.
+- At least some TCP/UDP cases generate a non-(none) diagram that passes lexical validation.
+
+Implement this end-to-end and show diffs. If file paths differ, adapt but keep behavior.

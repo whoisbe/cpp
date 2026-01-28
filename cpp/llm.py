@@ -25,13 +25,14 @@ class LLMClient:
                 "or pass api_key parameter."
             )
 
-    def generate_raw(self, system_prompt: str) -> str:
-        """Call upstream LLM with the given system prompt and return raw response text.
+    def generate_raw(self, system_prompt: str, user_message: str) -> str:
+        """Call upstream LLM with system and user messages, return raw response text.
 
         Makes exactly one upstream LLM call. No parsing or validation.
 
         Args:
-            system_prompt: Full system message (e.g. rendered upstream template).
+            system_prompt: System message with instructions (template minus user question section).
+            user_message: User message with the actual question.
 
         Returns:
             Raw response text from the model.
@@ -47,7 +48,7 @@ class LLMClient:
             model=self.model,
             messages=[
                 {"role": "system", "content": system_prompt},
-                {"role": "user", "content": "Proceed."},
+                {"role": "user", "content": user_message},
             ],
             temperature=0.7,
         )

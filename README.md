@@ -34,6 +34,8 @@ cd cpp
 pip install -e .
 ```
 
+Note: This project uses a uv workspace that includes `nlp_diagrammer` as a sibling package. The workspace is configured in `pyproject.toml`. If imports fail, ensure `nlp_diagrammer` is available in the workspace or adjust the import path in `cpp/nlp_import.py`.
+
 3. Set your OpenAI API key:
 ```bash
 export OPENAI_API_KEY=your-api-key-here
@@ -63,6 +65,7 @@ The CLI will:
 
 - **`--no-diagrams`** — Always hide diagrams, even if the upstream model includes them.
 - **`--debug`** — Print validator decisions for each chunk: extra tokens (if any) and whether the diagram was shown or hidden.
+- **`--no-nlp-shadow`** — Disable shadow NLP diagram logging (default: enabled). When enabled, NLP-based diagram analysis is computed and logged alongside LLM diagrams for comparison.
 
 Example:
 
@@ -105,6 +108,22 @@ The system consists of three main components:
 - **LLM (`cpp/llm.py`)**: Interfaces with the OpenAI API
 
 See `docs/spec.md` for detailed architecture and design decisions.
+
+## Stress Testing
+
+Run automated stress tests:
+
+```bash
+python scripts/run_stress.py
+```
+
+Or using make:
+
+```bash
+make stress
+```
+
+This runs a suite of prompts and generates summary reports in `runs_stress/_reports_<timestamp>/`. See `docs/stress_automation.md` for details.
 
 ## Development
 

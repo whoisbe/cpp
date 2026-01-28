@@ -1,0 +1,9 @@
+[project]
+name = "nlp_diagrammer"
+version = "0.1.0"
+description = "Experimental NLP-based diagram renderer"
+requires-python = ">=3.9"
+dependencies = []
+
+[tool.setuptools]
+packages = ["nlp_diagrammer"]

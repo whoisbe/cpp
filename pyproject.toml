@@ -20,3 +20,8 @@ packages = ["cpp", "cpp.prompts"]
 
 [tool.setuptools.package-data]
 cpp.prompts = ["*.md"]
+
+[tool.uv.workspace]
+members = [
+    "nlp_diagrammer",
+]

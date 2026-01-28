@@ -1,0 +1,62 @@
+[
+  {
+    "id": "1",
+    "input": "TCP prioritizes reliability over speed.",
+    "expected_type": "priority",
+    "glue_limit": true
+  },
+  {
+    "id": "2",
+    "input": "UDP offers speed vs reliability.",
+    "expected_type": "compare",
+    "glue_limit": true
+  },
+  {
+    "id": "3",
+    "input": "HTTP works without encryption.",
+    "expected_type": "priority",
+    "glue_limit": true
+  },
+  {
+    "id": "4",
+    "input": "System employs safety first.",
+    "expected_type": "priority",
+    "glue_limit": true
+  },
+  {
+    "id": "5",
+    "input": "Data can be structured, semi-structured, or unstructured.",
+    "expected_type": "category",
+    "glue_limit": true
+  },
+  {
+    "id": "6",
+    "input": "A request includes headers and a body.",
+    "expected_type": "category",
+    "glue_limit": true
+  },
+  {
+    "id": "7",
+    "input": "Clients initiate requests, servers respond.",
+    "expected_type": "compare",
+    "glue_limit": true
+  },
+  {
+    "id": "8",
+    "input": "Safety first!",
+    "expected_type": null,
+    "glue_limit": true
+  },
+  {
+    "id": "9",
+    "input": "HTTP provides in-order delivery vs UDP.",
+    "expected_type": "compare",
+    "glue_limit": true
+  },
+  {
+    "id": "10",
+    "input": "First we do this, then we do that.",
+    "expected_type": null,
+    "glue_limit": true
+  }
+]

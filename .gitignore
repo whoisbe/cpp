@@ -35,3 +35,18 @@ ENV/
 # Environment variables
 .env
 .env.local
+
+# CPP runtime artifacts
+runs/
+runs_stress/
+out/
+
+# Zip artifacts
+*.zip
+
+# uv / virtual environments
+.venv/
+uv.lock
+
+# NLP diagrammer eval outputs
+nlp_diagrammer/out/

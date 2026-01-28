@@ -16,6 +16,72 @@ class Chunk:
     diagram_lines: Optional[List[str]]  # None if no diagram or Diagram: (none)
 
 
+def parse_ideas_only(raw: str) -> List[str]:
+    """Parse ideas-only response (no diagrams) into list of idea strings.
+    
+    Format per item:
+        Idea <n>: <text>
+    
+    Args:
+        raw: Raw LLM response text.
+        
+    Returns:
+        List of idea text strings (no "Idea n:" prefix).
+    """
+    ideas: List[str] = []
+    # Split by "Idea <n>:" markers (n = 1, 2, ...)
+    blocks = re.split(r'(?=^Idea\s+\d+:)', raw.strip(), flags=re.MULTILINE)
+    
+    for block in blocks:
+        block = block.strip()
+        if not block:
+            continue
+        
+        match = re.match(r'^Idea\s+\d+:\s*(.*)', block, re.DOTALL)
+        if not match:
+            continue
+        
+        idea_text = match.group(1).strip()
+        if idea_text:
+            ideas.append(idea_text)
+    
+    return ideas
+
+
+def parse_diagram_only(raw: str) -> Optional[List[str]]:
+    """Parse diagram-only response into list of diagram lines.
+    
+    Format:
+        Diagram:
+        <lines until blank> or (none)
+    
+    Args:
+        raw: Raw LLM response text.
+        
+    Returns:
+        List of diagram lines, or None if "(none)" or empty.
+    """
+    # Find "Diagram:" marker
+    diagram_match = re.search(r'Diagram:\s*', raw, re.IGNORECASE)
+    if not diagram_match:
+        return None
+    
+    diagram_part = raw[diagram_match.end():].strip()
+    
+    if not diagram_part or re.match(r'^\(none\)\s*$', diagram_part, re.IGNORECASE):
+        return None
+    
+    # Diagram runs until blank line (or end)
+    lines = []
+    for line in diagram_part.split('\n'):
+        stripped = line.strip()
+        if not stripped:
+            break
+        lines.append(stripped)
+    
+    return lines if lines else None
+
+
 def parse_chunks(raw: str) -> List[Chunk]:
     """Parse upstream multi-item response into List[Chunk].
 
