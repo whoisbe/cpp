@@ -11,8 +11,8 @@ from .diagram_validator import (
     should_hide_diagram,
 )
 from .llm import LLMClient
-from .parser import parse_ideas_only, parse_diagram_only
-from .prompts.loader import load_explainer_prompt, load_visualizer_prompt
+from .parser import parse_ideas_only, parse_diagram_only, parse_map_only
+from .prompts.loader import load_explainer_prompt, load_visualizer_prompt, load_map_visualizer_prompt
 
 
 class ConversationProxy:
@@ -26,6 +26,8 @@ class ConversationProxy:
         debug: bool = False,
         log_dir: Optional[Path] = None,
         nlp_shadow: bool = True,
+        map_first: bool = False,
+        no_idea_diagrams: bool = False,
     ):
         """Initialize the proxy.
 
@@ -35,12 +37,16 @@ class ConversationProxy:
             debug: If True, store per-chunk debug info for validator decisions.
             log_dir: Optional directory for run logging (if None, no logging).
             nlp_shadow: If True, enable shadow NLP diagram logging (default: True).
+            map_first: If True, generate concept map before showing ideas.
+            no_idea_diagrams: If True, skip per-idea diagram generation.
         """
         self.llm_client = llm_client
         self.no_diagrams = no_diagrams
         self.debug = debug
         self.log_dir = log_dir
         self.nlp_shadow = nlp_shadow
+        self.map_first = map_first
+        self.no_idea_diagrams = no_idea_diagrams
         self.user_prompt: Optional[str] = None
         self.ideas: List[str] = []
         self.diagram_cache: Dict[int, Optional[str]] = {}  # index -> diagram or None
@@ -48,7 +54,9 @@ class ConversationProxy:
         self.current_index: int = 0
         self.explainer_model: str = llm_client.model
         self.visualizer_model: str = llm_client.model
+        self.map_visualizer_model: str = llm_client.model
         self.explain_raw: Optional[str] = None
+        self.concept_map_text: Optional[str] = None
         self.run_path: Optional[Path] = None
 
     def start_conversation(self, user_prompt: str) -> None:
@@ -80,6 +88,19 @@ class ConversationProxy:
             save_explain_output(self.run_path, self.explain_raw)
             save_ideas(self.run_path, self.ideas)
 
+        # Generate concept map if map_first mode
+        if self.map_first and self.ideas:
+            # Format ideas as numbered list for map visualizer
+            numbered_ideas = [f"Idea {i+1}: {idea}" for i, idea in enumerate(self.ideas)]
+            map_system_prompt, _ = load_map_visualizer_prompt(numbered_ideas)
+            map_raw = self.llm_client.generate_raw(map_system_prompt, "")
+            self.concept_map_text = parse_map_only(map_raw)
+            
+            # Save concept map if logging
+            if self.run_path:
+                from .run_logger import save_concept_map
+                save_concept_map(self.run_path, self.concept_map_text)
+
     def _generate_diagram(self, idea_index: int) -> Optional[str]:
         """Generate diagram for idea at given index (0-based).
         
@@ -95,6 +116,20 @@ class ConversationProxy:
             return self.diagram_cache[idea_index]
 
         if idea_index >= len(self.ideas):
+            return None
+
+        # Skip diagram generation if no_idea_diagrams flag is set
+        if self.no_idea_diagrams:
+            self.diagram_cache[idea_index] = None
+            self.diagram_metadata[idea_index] = {
+                "diagram_generated": False,
+                "diagram_hidden": False,
+                "hidden_reason": "flag_no_idea_diagrams",
+                "extra_tokens": [],
+            }
+            if self.run_path:
+                from .run_logger import save_diagram
+                save_diagram(self.run_path, idea_index + 1, "(none)")
             return None
 
         idea_text = self.ideas[idea_index]
@@ -270,6 +305,9 @@ class ConversationProxy:
             validator_max_extras=0,
             ideas=self.ideas,
             items=items,
+            concept_map_generated=self.map_first and self.concept_map_text is not None,
+            concept_map_prompt_version="map_visualizer_v1" if self.map_first else None,
+            concept_map_model=self.map_visualizer_model if self.map_first else None,
         )
 
     def get_session_state(self) -> dict:

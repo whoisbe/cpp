@@ -82,6 +82,40 @@ def parse_diagram_only(raw: str) -> Optional[List[str]]:
     return lines if lines else None
 
 
+def parse_map_only(raw: str) -> Optional[str]:
+    """Parse map-only response into map text string.
+    
+    Format:
+        Map:
+        <lines until blank> or (none)
+    
+    Args:
+        raw: Raw LLM response text.
+        
+    Returns:
+        Map text as string, or None if "(none)" or empty.
+    """
+    # Find "Map:" marker
+    map_match = re.search(r'Map:\s*', raw, re.IGNORECASE)
+    if not map_match:
+        return None
+    
+    map_part = raw[map_match.end():].strip()
+    
+    if not map_part or re.match(r'^\(none\)\s*$', map_part, re.IGNORECASE):
+        return None
+    
+    # Map runs until blank line (or end)
+    lines = []
+    for line in map_part.split('\n'):
+        stripped = line.strip()
+        if not stripped:
+            break
+        lines.append(stripped)
+    
+    return "\n".join(lines) if lines else None
+
+
 def parse_chunks(raw: str) -> List[Chunk]:
     """Parse upstream multi-item response into List[Chunk].
 

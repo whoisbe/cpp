@@ -51,6 +51,10 @@ def save_run_metadata(
     validator_max_extras: int,
     ideas: List[str],
     items: List[Dict[str, Any]],
+    *,
+    concept_map_generated: bool = False,
+    concept_map_prompt_version: Optional[str] = None,
+    concept_map_model: Optional[str] = None,
 ) -> None:
     """Save run.json metadata file.
     
@@ -93,6 +97,14 @@ def save_run_metadata(
         "ideas_count": len(ideas),
         "items": items,
     }
+    
+    # Add concept map fields if map was generated
+    if concept_map_generated:
+        metadata["concept_map_generated"] = True
+        if concept_map_prompt_version:
+            metadata["concept_map_prompt_version"] = concept_map_prompt_version
+        if concept_map_model:
+            metadata["concept_map_model"] = concept_map_model
     
     run_json_path = run_path / "run.json"
     with open(run_json_path, "w", encoding="utf-8") as f:
@@ -147,6 +159,40 @@ def save_nlp_diagram(run_path: Path, index: int, diagram_text: Optional[str]) ->
         nlp_diagram_path.write_text("(none)", encoding="utf-8")
     else:
         nlp_diagram_path.write_text(diagram_text, encoding="utf-8")
+
+
+def save_concept_map(run_path: Path, concept_map_text: Optional[str]) -> None:
+    """Save concept map to concept_map.txt.
+    
+    Args:
+        run_path: Path to run directory.
+        concept_map_text: Concept map text or None (will write "(none)").
+    """
+    concept_map_path = run_path / "concept_map.txt"
+    if concept_map_text is None:
+        concept_map_path.write_text("(none)", encoding="utf-8")
+    else:
+        concept_map_path.write_text(concept_map_text, encoding="utf-8")
+
+
+def load_concept_map(run_path: Path) -> Optional[str]:
+    """Load concept map from concept_map.txt.
+    
+    Args:
+        run_path: Run directory path.
+        
+    Returns:
+        Concept map text, or None if file doesn't exist or is "(none)".
+    """
+    concept_map_path = run_path / "concept_map.txt"
+    if not concept_map_path.exists():
+        return None
+    
+    text = concept_map_path.read_text(encoding="utf-8").strip()
+    if not text or text == "(none)":
+        return None
+    
+    return text
 
 
 def load_run_metadata(run_path: Path) -> Dict[str, Any]:

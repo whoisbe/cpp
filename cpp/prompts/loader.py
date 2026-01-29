@@ -135,3 +135,25 @@ def load_visualizer_prompt(idea_text: str) -> Tuple[str, str]:
     # The template is designed to be a single system message
     # Return as system prompt with empty user message
     return (system_prompt.strip(), "")
+
+
+def load_map_visualizer_prompt(ideas: list[str]) -> Tuple[str, str]:
+    """Load map visualizer prompt template and substitute ideas list.
+    
+    Args:
+        ideas: List of numbered idea strings (e.g., ["Idea 1: ...", "Idea 2: ..."]).
+        
+    Returns:
+        Tuple of (system_prompt, user_message).
+    """
+    template = load_prompt_text("prompts/map_visualizer_v1.md")
+    
+    # Format ideas as numbered list
+    ideas_list = "\n".join(ideas)
+    
+    # Replace {{IDEAS_LIST}} placeholder
+    system_prompt = template.replace("{{IDEAS_LIST}}", ideas_list)
+    
+    # The template is designed to be a single system message
+    # Return as system prompt with empty user message
+    return (system_prompt.strip(), "")

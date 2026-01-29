@@ -8,7 +8,7 @@ from typing import Any, Dict, Optional
 
 from .llm import LLMClient
 from .proxy import ConversationProxy
-from .run_logger import load_run_metadata, load_ideas, load_diagram
+from .run_logger import load_run_metadata, load_ideas, load_diagram, load_concept_map
 
 
 def format_chunk(chunk: Dict[str, Any], index: int, debug: bool = False) -> str:
@@ -150,6 +150,11 @@ class ReplayProxy:
         self.ideas = load_ideas(run_path)
         self.current_index = 0
         
+        # Load concept map if it exists and run indicates map-first mode
+        self.concept_map_text: Optional[str] = None
+        if self.run_metadata.get("concept_map_generated", False):
+            self.concept_map_text = load_concept_map(run_path)
+        
         # Validate ideas count
         expected_count = self.run_metadata.get("ideas_count", 0)
         if len(self.ideas) != expected_count and debug:
@@ -264,6 +269,18 @@ def main() -> None:
         action="store_true",
         help="Disable shadow NLP diagram logging (default: enabled)",
     )
+    ask_parser.add_argument(
+        "--map-first",
+        action="store_true",
+        default=False,
+        help="Generate and show system concept map before ideas (default: False)",
+    )
+    ask_parser.add_argument(
+        "--no-idea-diagrams",
+        action="store_true",
+        default=False,
+        help="Skip per-idea diagram generation (evaluation helper)",
+    )
     
     # replay command
     replay_parser = subparsers.add_parser("replay", help="Replay a previous run")
@@ -290,9 +307,26 @@ def main() -> None:
                 debug=args.debug,
                 log_dir=args.log_dir,
                 nlp_shadow=not args.no_nlp_shadow,
+                map_first=args.map_first,
+                no_idea_diagrams=args.no_idea_diagrams,
             )
             print(f"Processing: {args.prompt}\n")
             proxy.start_conversation(args.prompt)
+            
+            # Show concept map first if map_first mode
+            if args.map_first and proxy.concept_map_text:
+                print("System Map")
+                print("-" * 50)
+                print(proxy.concept_map_text)
+                print("-" * 50)
+                print("Press Enter to start ideas...")
+                try:
+                    input()
+                except (EOFError, KeyboardInterrupt):
+                    print("\n\nGoodbye!")
+                    sys.exit(0)
+                print()
+            
             run_interactive_loop(proxy, is_replay=False)
             proxy.finalize_run()
         except KeyboardInterrupt:
@@ -316,6 +350,21 @@ def main() -> None:
                 debug=args.debug,
             )
             print(f"Replaying: {args.run_path}\n")
+            
+            # Show concept map first if it exists
+            if proxy.concept_map_text:
+                print("System Map")
+                print("-" * 50)
+                print(proxy.concept_map_text)
+                print("-" * 50)
+                print("Press Enter to start ideas...")
+                try:
+                    input()
+                except (EOFError, KeyboardInterrupt):
+                    print("\n\nGoodbye!")
+                    sys.exit(0)
+                print()
+            
             run_interactive_loop(proxy, is_replay=True)
         except KeyboardInterrupt:
             print("\n\nInterrupted. Goodbye!")
